@@ -1,0 +1,39 @@
+# Node.js
+node_modules/
+
+# Build files
+/build
+/dist
+
+# Environment variables
+.env
+
+# Log files
+*.log
+
+# macOS
+.DS_Store
+
+# Editor/IDE specific
+.vscode/
+.idea/
+
+# Dependency lock files
+package-lock.json
+yarn.lock
+
+# Testing
+/coverage
+
+# Compiled TypeScript files
+*.js
+
+# Server-specific
+# If you're using a different server framework, update these patterns accordingly
+# Express
+# /server/node_modules/
+# /server/build
+
+# React-specific
+# /client/node_modules/
+# /client/build
