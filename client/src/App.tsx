@@ -5,7 +5,7 @@ import HomePage from "../components/HomePage.tsx";
 import './App.css';
 import Problem from "../components/Problem.tsx";
 import LoginPage from "../components/LoginPage.tsx";
-import {Route,Routes} from 'react-router-dom'
+import {Route,Routes} from 'react-router-dom';
 function App() {
 
 
@@ -16,7 +16,7 @@ function App() {
             <Route path='/AllProblems' element={<AllProblems/>}/>
             <Route path='/' element={<HomePage/>}/>
             <Route path='/login' element={<LoginPage/>}/>
-            <Route path='/problem' element={<Problem/>}/>
+            <Route path='/problem/:id' element={<Problem/>}/>
         </Routes>
     </>
   )
