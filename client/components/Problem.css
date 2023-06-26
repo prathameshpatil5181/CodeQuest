@@ -126,6 +126,7 @@ select{
     font-size: 10px;
     outline: none;
 }
+
 option{
 
 }
@@ -134,23 +135,43 @@ option{
     flex-direction: row;
     padding-left: 20px;
     gap:3px;
-    font-size: 9px;
+    font-size: 12px;
     margin-top: 5px;
     overflow-x: hidden;
     overflow-y: scroll;
     height:60vh;
 }
 .codeIndexes{
-    padding: 0;
+    padding:0;
     margin: 0;
 }
-textarea{
+.code{
     padding: 0;
-    width:100vw;
-    border: none;
     outline:none;
     font-size: 10px;
+    width: 40vw;
+    margin: 0;
+    /*line-height: 20px;*/
 }
+
+.codeIndexes div{
+    padding: 0;
+    margin: 0;
+    height:20px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    caret-color: auto;
+}
+.code div{
+    padding: 0;
+    margin: 0;
+    font-size: 10px;
+    height:20px;
+    display: flex;
+    align-items: center;
+}
+
 .submit_result{
     display: flex;
     flex-direction: column;
@@ -160,7 +181,6 @@ textarea{
     background-color: white;
     height:28vh;
     border-radius: 4px;
-    padding-bottom:10px;
 }
 .test_options{
     border-bottom: 1px solid #dadada;
@@ -177,15 +197,25 @@ textarea{
 }
 .buttons{
     display: flex;
-    align-items: self-end;
+    justify-content:flex-end;
+    align-items: center;
     gap: 5px;
-    padding-left: 35vw;
+    height:50px;
+    border-top:1px solid #dadada;
+    padding-right: 10px;
 }
 .submit_button{
     background-color: #72e572;
+    color: white;
 }
-
+button{
+    height: 23px;
+    font-size: 8px;
+}
 .submit_button:hover{
     outline: none;
+}
+.result{
+    padding-left:20px;
 }
 

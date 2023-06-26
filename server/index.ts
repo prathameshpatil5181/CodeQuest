@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import {Request,Response} from "express";
-
+import {codingLanguages} from "./data";
 const port:number = 3000;
 const app = express();
 app.use(cors());
@@ -243,6 +243,11 @@ app.get("/problem/:id",(req:Request,res:Response)=>{
     const problem = allproblems.find((x)=>x.problemid===id);
     res.json({problem:problem});
 
+})
+app.get('/launguage',(req:Request,res:Response)=>{
+    res.json({
+        launguage:codingLanguages
+    })
 })
 
 app.listen(port,()=>{
