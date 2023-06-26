@@ -19,3 +19,8 @@ export interface filterprob {
     difficulty: string,
     acceptance: string,
 }
+export interface CodingLanguage {
+    id: number;
+    name: string;
+    sampleCode: string;
+}

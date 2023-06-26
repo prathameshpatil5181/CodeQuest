@@ -1,18 +1,27 @@
 import '../components/Problem.css'
 import {useParams} from "react-router-dom";
-import {ChangeEvent, useEffect, useState} from "react";
-import {prob, examp} from '../GolbalComponents/Constant.ts';
+import {ChangeEvent, useEffect, useState,useRef} from "react";
+import {prob, examp,CodingLanguage} from '../GolbalComponents/Constant.ts';
 
 const Problem: React.FC = () => {
     const params = useParams();
     const [probval, setProbval] = useState<prob>()
     const [textrow,setTextrows]=useState<number>(1);
+    const[launguage,setLaunguage]=useState<CodingLanguage[]>([])
+    const[selectvalue, setSelectValue]=useState<String>('C++');
+    const valueofdiv = useRef<HTMLDivElement>(null);
     async function init() {
-        const response = await fetch(`http://localhost:3000/problem/${params.id}`, {
+        let response = await fetch(`http://localhost:3000/problem/${params.id}`, {
             method: "GET"
         })
-        const json = await response.json();
+        let json = await response.json();
         setProbval(json.problem);
+        response = await  fetch('http://localhost:3000/launguage',{
+            method:"GET"
+        })
+        json = await response.json();
+
+        setLaunguage(json.launguage);
 
     }
 
@@ -20,13 +29,18 @@ const Problem: React.FC = () => {
         init();
     }, [])
 
-    function handlerows(e:ChangeEvent<HTMLInputElement>):void{
-        const rows:number=e.target.value.split('\n').length;
-        setTextrows(rows);
-        console.log(rows);
+    function handlerows(e:ChangeEvent<HTMLDivElement>):void{
+       const divHeight:number = e.target.offsetHeight;
+       let lineHeight = parseInt(e.target?.style.lineHeight);
+       const lines:number = divHeight/lineHeight;
+        setTextrows(lines);
     }
 
-
+function handleselect(e:ChangeEvent<HTMLSelectElement>){
+        const value1 = e.target.value;
+        console.log(value1);
+        setSelectValue(value1);
+}
     return (
         <>
             <div className="main">
@@ -67,11 +81,12 @@ const Problem: React.FC = () => {
                 <div className="code_components">
                     <div className="lang_select">
                         <nav className="Select">
-                            <select name="languages" id="languages">
-                                <option value="C++">C++</option>
-                                <option value="Java">Java</option>
-                                <option value="Python">Python</option>
-                                <option value="javascript">Javascript</option>
+                            <select name="languages" id="languages" onChange={handleselect}>
+                                {
+                                    launguage.map(x=>(
+                                        <option key={x.name}>{x.name}</option>
+                                    ))
+                                }
                             </select>
                         </nav>
                     </div>
@@ -80,10 +95,9 @@ const Problem: React.FC = () => {
                             {Array.from({ length: textrow }, (_, index) => (
                                 <div key={index}>{index + 1}</div>
                             ))}
-
                         </div>
                         <div className="code_text">
-                            <textarea className="code" onChange={handlerows} defaultValue=""></textarea>
+                            <div contentEditable="true" ref={valueofdiv} className="code" style={{lineHeight:'20px'}} onInput={handlerows} ></div>
                         </div>
                     </div>
                 </div>
@@ -98,7 +112,7 @@ const Problem: React.FC = () => {
                             this are the results
                         </div>
                      <div className='buttons'>
-                         <button className="run_testcases">Run Testcases</button>
+                         <button className="run_testcases">Run</button>
                         <button className="submit_button">Submit</button>
                      </div>
                     </div>
