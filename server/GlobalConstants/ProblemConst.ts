@@ -158,7 +158,7 @@ export const allproblems: prob[] = [
   },
 
   {
-    problemid: 8,
+    problemid: 7,
     title: "Median of Two Sorted Arrays",
     Statement:
       "Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.",
@@ -181,7 +181,7 @@ export const allproblems: prob[] = [
     ],
   },
   {
-    problemid: 9,
+    problemid: 8,
     title: "Regular Expression Matching",
     Statement:
       "Given an input string s and a pattern p, implement regular expression matching with support for '.' and '*' where:\n\n'.' Matches any single character.\n'*' Matches zero or more of the preceding element.",
@@ -204,7 +204,7 @@ export const allproblems: prob[] = [
     ],
   },
   {
-    problemid: 10,
+    problemid: 9,
     title: "Container With Most Water",
     Statement:
       "Given n non-negative integers a1, a2, ..., an , where each represents a point at coordinate (i, ai). n vertical lines are drawn such that the two endpoints of the line i is at (i, ai) and (i, 0). Find two lines, which, together with the x-axis forms a container, such that the container contains the most water.",
