@@ -1,13 +1,20 @@
 import "../components/Problem.css";
 import { useParams } from "react-router-dom";
-import { ChangeEvent, useEffect, useState, useRef } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { prob, examp, CodingLanguage } from "../GolbalComponents/Constant.ts";
 import CodeEditor from "./editor/CodeEditor.tsx";
+import Testcases from "./testcases.tsx";
+import LoadingSpinnerSvg from "./LoadingSpinnerSvg.tsx"
 
 interface Iresult {
-  success: true;
+  success: boolean;
   error: boolean;
-  output: string;
+  output: {
+    input: string;
+    ExpectedOutput: string;
+    output: string;
+    pass: boolean;
+  }[];
 }
 
 const Problem: React.FC = () => {
@@ -43,12 +50,14 @@ const Problem: React.FC = () => {
         body: JSON.stringify({
           file: code,
           launguage: selectvalue,
+          id: params.id,
         }),
       });
 
       const jsonResp = await response.json();
       console.log(jsonResp);
       setResult(jsonResp);
+      setSendToServer(false);
     } catch (error) {
       console.log("error sending the code");
       console.log(error);
@@ -137,7 +146,6 @@ const Problem: React.FC = () => {
           <div className="nav-class">
             <nav className="test_options">
               <ul className="casefont">
-                <li>Testcases</li>
                 <li>Results</li>
               </ul>
             </nav>
@@ -149,18 +157,42 @@ const Problem: React.FC = () => {
               backgroundColor: result?.error === true ? "#ff62623b" : "",
             }}
           >
-            {result?.output}
+            {result && (
+              <div
+                style={{
+                  color: result?.success === true ? "rgb(45 181 93/1)" : "red",
+                  margin: "10px 0px 0px 0px",
+                  fontSize: "20px",
+                }}
+              >
+                {result !== undefined && result?.success === true
+                  ? "Accepted"
+                  : "Wrong Answer"}
+              </div>
+            )}
+
+            {result?.error === false ? (
+              <Testcases result={result.output} />
+            ) : (
+              result?.output[0].output
+            )}
           </div>
           <div className="buttons">
             <button className="run_testcases">Run</button>
-            <button
-              className="submit_button"
-              onClick={() => {
-                setCode(!code);
-              }}
-            >
-              Submit
-            </button>
+            {sendToserver === false ? (
+              <button
+                className="submit_button"
+                onClick={() => {
+                  setCode(!code);
+                }}
+              >
+                Submit
+              </button>
+            ) : (
+              <button className="submit_button">
+                <LoadingSpinnerSvg />
+              </button>
+            )}
           </div>
         </div>
       </div>

@@ -10,8 +10,8 @@ function App() {
     <div
       style={{
         display: "grid",
-        gridTemplateRows: "5% 95%",
-        height:"100%"
+        gridTemplateRows: "6% 94%",
+        height: "100%",
       }}
     >
       <Navbar />

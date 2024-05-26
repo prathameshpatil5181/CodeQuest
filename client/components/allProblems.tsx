@@ -2,7 +2,7 @@ import './allProblems.css'
 import {useEffect,useState} from "react";
 import {filterprob} from '../GolbalComponents/Constant.ts';
 import {Link}from 'react-router-dom';
-let Url:string = 'http://localhost:3000/problems'
+const Url = 'http://localhost:3000/problems'
 const AllProblems: React.FC = () => {
     const[problems1,setPb]=useState<filterprob[]|null>(null);
     async function init(){

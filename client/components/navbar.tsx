@@ -2,14 +2,11 @@ import logo from "../elements/logo.png";
 import "../components/navbar.css";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
 
 const Navbar: React.FC = () => {
-  const [underline, setUnderline] = useState<string>("home");
   const loginpage = useNavigate();
   const handleNavigate = () => {
     loginpage("/login");
-    setUnderline("login");
   };
   return (
     <nav className="navbar_main">
